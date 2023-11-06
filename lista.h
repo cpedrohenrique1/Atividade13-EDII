@@ -6,7 +6,7 @@
 class Lista
 {
 private:
-    NO* inicio;
+//    NO* inicio;
 public:
     Lista();
 };
