@@ -1,6 +1,14 @@
 #include "no.h"
 
-NO::NO()
+template<class T>
+NO<T>::NO()
 {
 
 }
+
+template<class T>
+NO<T>::NO(T newDado)
+{
+
+}
+
