@@ -1,12 +1,14 @@
 #include "no.h"
 
 template<class T>
-NO<T>::NO() :   proximo(0)
+NO<T>::NO() :   proximo(0),
+                anterior(0)
 {}
 
 template<class T>
-NO<T>::NO(T newDado) : dado(newDado),
-                        proximo(0)
+NO<T>::NO(T newDado) :  dado(newDado),
+                        proximo(0),
+                        anterior(0)
 {}
 
 template<class T>
@@ -25,7 +27,16 @@ void NO<T>::setProximo(NO* newProximo){
 }
 
 template<class T>
-NO *NO<T>::getProximo() const
-{
+NO<T> *NO<T>::getProximo() const{
     return proximo;
+}
+
+template<class T>
+NO<T>* NO<T>::getAnterior()const{
+    return anterior;
+}
+
+template <class T>
+void NO<T>::setAnterior(NO* newAnterior){
+    anterior = newAnterior;
 }
