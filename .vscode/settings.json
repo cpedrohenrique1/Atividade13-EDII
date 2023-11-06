@@ -15,7 +15,9 @@
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includePaths": [
+    "/usr/include/x86_64-linux-gnu/qt5/**"
+  ],
   "C_Cpp_Runner.includeSearch": [
     "*",
     "**/*"
@@ -27,5 +29,17 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "files.associations": {
+    "optional": "cpp",
+    "random": "cpp",
+    "limits": "cpp",
+    "memory": "cpp",
+    "new": "cpp",
+    "numeric": "cpp",
+    "*.tcc": "cpp",
+    "cmath": "cpp",
+    "utility": "cpp",
+    "variant": "cpp"
+  }
 }
