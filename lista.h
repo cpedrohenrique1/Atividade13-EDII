@@ -2,6 +2,8 @@
 #define LISTA_H
 
 #include "no.h"
+#include <iostream>
+#include <QString>
 
 template <class T>
 class Lista
