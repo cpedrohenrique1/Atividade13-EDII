@@ -13,18 +13,18 @@ private:
 public:
     Lista();
     bool estaVazia() const;
-    void inserirInicio(int entrada);
-    int acessarInicio() const;
-    int retirarInicio();
-    void inserirFim(int entrada);
-    int acessarFim() const;
-    int retirarFim();
-    void inserirPosicao(int posicao, int entrada);
-    int acessarPosicao(int posicao) const;
-    int retirarPosicao(int posicao);
+    void inserirInicio(T entrada);
+    T acessarInicio() const;
+    T retirarInicio();
+    void inserirFim(T entrada);
+    T acessarFim() const;
+    T retirarFim();
+    void inserirPosicao(int posicao, T entrada);
+    T acessarPosicao(int posicao) const;
+    T retirarPosicao(int posicao);
     QString obterDados() const;
     int getQuantidadeElementos() const;
-    void inserirOrdenado(int entrada);
+    void inserirOrdenado(T entrada);
 };
 
 #endif // LISTA_H
