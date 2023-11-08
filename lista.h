@@ -18,13 +18,19 @@ public:
                 quantidadeElementos(0)
     {}
     
+    ~Lista(){
+        while (!estaVazia()){
+            retirarInicio();
+        }
+    }
+    
     bool estaVazia() const{
         return !(bool(quantidadeElementos));
     }
     
-    void inserirInicio(L entrada){
+    void inserirInicio(L entrada, int chave){
         try{
-            NO<L>* newElemento = new NO<L>(entrada);
+            NO<L>* newElemento = new NO<L>(entrada, chave);
             if (estaVazia()){
                 inicio = fim = newElemento;
                 ++quantidadeElementos;
@@ -38,7 +44,7 @@ public:
             throw QString("Erro ao inserir no inicio, nao foi possivel alocar memoria");
         }
     }
-    
+
     L acessarInicio() const{
         return inicio;
     }
@@ -63,13 +69,13 @@ public:
         return valor;
     }
     
-    void inserirFim(L entrada){
+    void inserirFim(L entrada, int chave){
         if (estaVazia()){
             inserirInicio(entrada);
             return;
         }
         try{
-            NO<L>* newElemento = new NO<L>(entrada);
+            NO<L>* newElemento = new NO<L>(entrada, chave);
             newElemento->setAnterior(fim);
             fim->setProximo(newElemento);
             fim = newElemento;
@@ -100,7 +106,7 @@ public:
         return valor;
     }
     
-    void inserirPosicao(int posicao, L entrada){
+    void inserirPosicao(int posicao, L entrada, int chave){
         if (posicao < 0 || posicao > quantidadeElementos){
             throw QString("Posicao invalida, nao pode ser menor que 0 ou maior que a quantidade de elementos");
         }
@@ -113,7 +119,7 @@ public:
             return;
         }
         try{
-            NO<L>* newElemento = new NO<L>(entrada);
+            NO<L>* newElemento = new NO<L>(entrada, chave);
             NO<L>* aux;
             if (posicao < quantidadeElementos / 2){
                 aux = inicio;
