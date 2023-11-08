@@ -69,7 +69,7 @@ void Lista<T>::inserirInicio(T entrada){
         inicio = newElemento;
         ++quantidadeElementos;
     }catch(std::bad_alloc &e){
-        throw QString("Erro ao inserir no inicio, nao foi possivel alocar memoria")
+        throw QString("Erro ao inserir no inicio, nao foi possivel alocar memoria");
     }
 }
 
@@ -109,11 +109,6 @@ void Lista<T>::inserirPosicao(int posicao, T entrada){
     }catch(std::bad_alloc &e){
         throw QString("Erro ao inserir no inicio, nao foi possivel alocar memoria");
     }
-}
-
-template<class T>
-QString Lista<T>::obterDados()const{
-    
 }
 
 template<class T>
@@ -185,8 +180,8 @@ T Lista<T>::retirarPosicao(int posicao){
     }
     NO<T>* anterior = aux->getAnterior();
     NO<T>* proximo = aux->getProximo();
-    anterior->setProximo(proximo)
-    proximo.setAnterior(anterior);
+    anterior->setProximo(proximo);
+    proximo->setAnterior(anterior);
     T valor = aux->getDado();
     delete aux;
     --quantidadeElementos;

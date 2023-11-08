@@ -12,12 +12,14 @@ SOURCES += \
     lista.cpp \
     main.cpp \
     mainwindow.cpp \
-    no.cpp
+    no.cpp \
+    tabhash.cpp
 
 HEADERS += \
     lista.h \
     mainwindow.h \
-    no.h
+    no.h \
+    tabhash.h
 
 FORMS += \
     mainwindow.ui
