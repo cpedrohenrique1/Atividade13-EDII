@@ -11,12 +11,12 @@ private:
     Lista<L>* tabela;
     int tamanhoTabela;
 public:
-    TabHash() :     tamanhoTabela(0),
-                    tabela(0)
+    TabHash() :     tabela(0),
+                    tamanhoTabela(0)
     {}
 
-    TabHash(int tamanhoTabela, int colisoes) :  tamanhoTabela(0),
-                                                tabela(0)
+    TabHash(int tamanhoTabela, int colisoes) :  tabela(0),
+                                                tamanhoTabela(0)
     {
         if (tamanhoTabela <= 0 || colisoes < 0){
             throw QString("Nao foi possivel, tamanho invalido ou colisoes negativas");
@@ -32,6 +32,10 @@ public:
         if (tabela){
             delete[] tabela;
         }
+    }
+
+    int getTamanhoTabela()const{
+        return tamanhoTabela;
     }
     
     void IncluirDados(L entrada, int chave){
@@ -87,6 +91,7 @@ public:
             }
             iterator = iterator->getProximo();
         }
+        return L();
     }
     
     int calcularNPrimo(const int& entrada, int colisoes){

@@ -1,6 +1,8 @@
 #ifndef NO_H
 #define NO_H
 
+#include <QString>
+
 template <class L>
 class NO
 {
@@ -11,15 +13,15 @@ private:
     NO* anterior;
 public:
     NO() :  dado(),
+            chave(0),
             proximo(0),
-            anterior(0),
-            chave(0)
+            anterior(0)
     {}
 
     NO(L newDado, int chave) :  dado(newDado),
+                                chave(0),
                                 proximo(0),
-                                anterior(0),
-                                chave(0)
+                                anterior(0)
     {
         if (chave < 0){
             throw QString("Chave invalida");

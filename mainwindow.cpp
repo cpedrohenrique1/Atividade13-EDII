@@ -6,12 +6,109 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    TabHash<QString> tabela;
-    tabela.calcularNPrimo(1000, 3);
+    try{
+        tabela = new Tabela(ui->tableWidget_saida_dados, 1000, 3);
+        tabela->start();
+        Arquivo arquivo(tabela->getVetor());
+        arquivo.abrir();
+        tabela->atualizar();
+    }catch(std::bad_alloc &e){
+        QMessageBox::information(this, "ERRO", e.what());
+    }
+    catch(QString &e){
+        QMessageBox::information(this, "ERRO", e);
+    }
+    catch(...){
+        QMessageBox::information(this, "ERRO", "Erro desconhecido");
+    }
 }
 
 MainWindow::~MainWindow()
 {
+    if (tabela)
+        delete tabela;
     delete ui;
+}
+
+void MainWindow::on_pushButton_inserir_clicked()
+{
+    try
+    {
+        bool ok;
+        int matricula = ui->lineEdit_matricula->text().toInt(&ok);
+        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
+        if (!ok)
+            throw QString("matricula nao pode estar vazia");
+        
+        tabela->inserirElemento(matricula, nomeCompleto);
+        QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + "\nNome Completo:" + tabela->buscaElemento(matricula) +" inserido");
+    }
+    catch(QString &e){
+        QMessageBox::critical(this, "Erro", e);
+    }
+    catch(...){
+        QMessageBox::critical(this, "Erro", "Erro desconhecido");
+    }
+}
+
+
+void MainWindow::on_pushButton_alterar_clicked()
+{
+    try
+    {
+        bool ok;
+        int matricula = ui->lineEdit_matricula->text().toInt(&ok);
+        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
+        if (!ok)
+            throw QString("n° matricula nao pode estar vazio");
+        tabela->alterarElemento(matricula, nomeCompleto);
+        QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + " alterado");
+    }
+    catch(QString &e){
+        QMessageBox::critical(this, "Erro", e);
+    }
+    catch(...){
+        QMessageBox::critical(this, "Erro", "Erro desconhecido");
+    }
+}
+
+
+void MainWindow::on_pushButton_remover_clicked()
+{
+    try
+    {
+        bool ok;
+        int matricula = ui->lineEdit_matricula->text().toInt(&ok);
+        if (!ok)
+            throw QString("n° matricula nao pode estar vazio");
+        tabela->removerElemento(matricula);
+        QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + " removido");
+    }
+    catch(QString &e){
+        QMessageBox::critical(this, "Erro", e);
+    }
+    catch(...){
+        QMessageBox::critical(this, "Erro", "Erro desconhecido");
+    }
+    
+}
+void MainWindow::on_pushButton_consultar_clicked()
+{
+    try
+    {
+        bool ok;
+        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
+        int matricula = ui->lineEdit_matricula->text().toInt(&ok);
+        if (ok)
+            QMessageBox::about(this, "Concluido", "Matricula: " + QString::number(matricula) + "\nNome Completo: " + tabela->buscaElemento(matricula));
+        else
+            tabela->atualizar();
+    }
+    catch(QString &e){
+        QMessageBox::critical(this, "Erro", e);
+    }
+    catch(...){
+        QMessageBox::critical(this, "Erro", "Erro desconhecido");
+    }
 }
 

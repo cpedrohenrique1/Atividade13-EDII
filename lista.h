@@ -13,9 +13,9 @@ private:
     NO<L>* inicio;
     NO<L>* fim;
 public:
-    Lista() :   inicio(0),
-                fim(0),
-                quantidadeElementos(0)
+    Lista() :   quantidadeElementos(0),
+                inicio(0),
+                fim(0)
     {}
     
     ~Lista(){
@@ -45,7 +45,7 @@ public:
         }
     }
 
-    L acessarInicio() const{
+    NO<L>* acessarInicio() const{
         return inicio;
     }
     
@@ -85,7 +85,7 @@ public:
         }
     }
     
-    L acessarFim() const{
+    NO<L>* acessarFim() const{
         return fim;
     }
     
@@ -94,8 +94,7 @@ public:
             throw QString("Lista ja vazia, nao foi possivel retirar");
         }
         if (quantidadeElementos == 1){
-            retirarInicio();
-            return;
+            return retirarInicio();
         }
         NO<L>* aux = fim;
         L valor = fim->getDado();
@@ -162,12 +161,10 @@ public:
             throw QString("Posicao invalida, nao pode ser menor que 0 ou maior igual que a quantidade de elementos");
         }
         if (quantidadeElementos == 1 || posicao == 0){
-            retirarInicio();
-            return;
+            return retirarInicio();
         }
         if (posicao == quantidadeElementos - 1){
-            retirarFim();
-            return;
+            return retirarFim();
         }
         NO<L>* aux;
         if (posicao < quantidadeElementos / 2){
