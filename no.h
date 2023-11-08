@@ -1,28 +1,29 @@
 #ifndef NO_H
 #define NO_H
 
-template <typename T>
+template <class L>
 class NO
 {
 private:
-    T dado;
+    L dado;
     NO* proximo;
     NO* anterior;
 public:
-    NO() :  proximo(0),
+    NO() :  dado(),
+            proximo(0),
             anterior(0)
     {}
 
-    NO(T newDado) :     dado(newDado),
+    NO(L newDado) :     dado(newDado),
                         proximo(0),
                         anterior(0)
     {}
 
-    T getDado()const{
+    L getDado()const{
         return dado;
     }
     
-    void setDado(T newDado){
+    void setDado(L newDado){
         dado = newDado;
     }
     

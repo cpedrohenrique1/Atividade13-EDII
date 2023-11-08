@@ -4,39 +4,35 @@
 #include "lista.h"
 #include <cmath>
 
-template <typename T>
+template <class L>
 class TabHash
 {
 private:
-    Lista<T>* tabela;
+    Lista<L>* tabela;
     int tamanhoTabela;
-    int nPrimo;
 public:
     TabHash() :     tamanhoTabela(0),
-                    tabela(0),
-                    nPrimo(0)
+                    tabela(0)
     {}
 
     TabHash(int tamanhoTabela) :    tamanhoTabela(0),
-                                    tabela(0),
-                                    nPrimo(0)
+                                    tabela(0)
     {
         if (tamanhoTabela <= 0){
             throw QString("Nao foi possivel, tamanho invalido");
         }
-        this->tamanhoTabela = tamanhoTabela;
         try{
-            tabela = new Lista<T>[calcularNPrimo(tamanhoTabela)];
+            tabela = new Lista<L>[calcularNPrimo(tamanhoTabela)];
         }catch(std::bad_alloc &e){
             throw QString("nao foi possivel alocar memoria");
         }
     }
     
-    void IncluirDados(int chave, T entrada)
+    void IncluirDados(int chave, L entrada);
     
     void ExcluirDados(int chave);
     
-    T Consultar(int chave);
+    L Consultar(int chave);
     
     int calcularNPrimo(const int& entrada){
         int divisao = entrada / 3;
@@ -53,8 +49,8 @@ public:
             }
         }
         std::cout << max << "\n";
-        nPrimo = max;
-        return nPrimo;
+        tamanhoTabela = max;
+        return tamanhoTabela;
     }
 };
 

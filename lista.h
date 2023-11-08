@@ -5,13 +5,13 @@
 #include <iostream>
 #include <QString>
 
-template <typename T>
+template <class L>
 class Lista
 {
 private:
     int quantidadeElementos;
-    NO<T>* inicio;
-    NO<T>* fim;
+    NO<L>* inicio;
+    NO<L>* fim;
 public:
     Lista() :   inicio(0),
                 fim(0),
@@ -22,9 +22,9 @@ public:
         return !(bool(quantidadeElementos));
     }
     
-    void inserirInicio(T entrada){
+    void inserirInicio(L entrada){
         try{
-            NO<T>* newElemento = new NO<T>(entrada);
+            NO<L>* newElemento = new NO<L>(entrada);
             if (estaVazia()){
                 inicio = fim = newElemento;
                 ++quantidadeElementos;
@@ -39,23 +39,23 @@ public:
         }
     }
     
-    T acessarInicio() const{
+    L acessarInicio() const{
         return inicio;
     }
     
-    T retirarInicio(){
+    L retirarInicio(){
         if (estaVazia()){
             throw QString("Lista ja vazia, nao foi possivel retirar");
         }
-        NO<T>* aux = inicio;
+        NO<L>* aux = inicio;
         if (quantidadeElementos == 1){
             quantidadeElementos = 0;
             inicio = fim = 0;
-            T valor = aux->getDado();
+            L valor = aux->getDado();
             delete aux;
             return valor;
         }
-        T valor = inicio->getDado();
+        L valor = inicio->getDado();
         inicio = inicio->getProximo();
         inicio->setAnterior(0);
         delete aux;
@@ -63,13 +63,13 @@ public:
         return valor;
     }
     
-    void inserirFim(T entrada){
+    void inserirFim(L entrada){
         if (estaVazia()){
             inserirInicio(entrada);
             return;
         }
         try{
-            NO<T>* newElemento = new NO<T>(entrada);
+            NO<L>* newElemento = new NO<L>(entrada);
             newElemento->setAnterior(fim);
             fim->setProximo(newElemento);
             fim = newElemento;
@@ -79,11 +79,11 @@ public:
         }
     }
     
-    T acessarFim() const{
+    L acessarFim() const{
         return fim;
     }
     
-    T retirarFim(){
+    L retirarFim(){
         if (estaVazia()){
             throw QString("Lista ja vazia, nao foi possivel retirar");
         }
@@ -91,8 +91,8 @@ public:
             retirarInicio();
             return;
         }
-        NO<T>* aux = fim;
-        T valor = fim->getDado();
+        NO<L>* aux = fim;
+        L valor = fim->getDado();
         fim = fim->getAnterior();
         fim->setProximo(0);
         delete aux;
@@ -100,7 +100,7 @@ public:
         return valor;
     }
     
-    void inserirPosicao(int posicao, T entrada){
+    void inserirPosicao(int posicao, L entrada){
         if (posicao < 0 || posicao > quantidadeElementos){
             throw QString("Posicao invalida, nao pode ser menor que 0 ou maior que a quantidade de elementos");
         }
@@ -113,8 +113,8 @@ public:
             return;
         }
         try{
-            NO<T>* newElemento = new NO<T>(entrada);
-            NO<T>* aux;
+            NO<L>* newElemento = new NO<L>(entrada);
+            NO<L>* aux;
             if (posicao < quantidadeElementos / 2){
                 aux = inicio;
                 for (int i = 0; i < posicao; ++i){
@@ -126,7 +126,7 @@ public:
                     aux = aux->getAnterior();
                 }
             }
-            NO<T>* anterior = aux->getAnterior();
+            NO<L>* anterior = aux->getAnterior();
             anterior->setProximo(newElemento);
             newElemento->setProximo(aux);
             newElemento->setAnterior(anterior);
@@ -137,18 +137,18 @@ public:
         }
     }
     
-    T acessarPosicao(int posicao) const{
+    L acessarPosicao(int posicao) const{
         if (posicao < 0 || posicao >= quantidadeElementos){
             throw QString("A posicao nao pode ser maior que a quantidade de elementos e nem menor que 0");
         }
-        NO<T>* elemento = inicio;
+        NO<L>* elemento = inicio;
         for (int i = 0; i < posicao; ++i){
             elemento = elemento->getProximo();
         }
         return elemento->getDado();
     }
     
-    T retirarPosicao(int posicao){
+    L retirarPosicao(int posicao){
         if (estaVazia()){
             throw QString("Lista ja vazia, nao foi possivel retirar");
         }
@@ -163,7 +163,7 @@ public:
             retirarFim();
             return;
         }
-        NO<T>* aux;
+        NO<L>* aux;
         if (posicao < quantidadeElementos / 2){
             aux = inicio;
             for (int i = 0; i < posicao; ++i){
@@ -175,11 +175,11 @@ public:
                 aux = aux->getAnterior();
             }
         }
-        NO<T>* anterior = aux->getAnterior();
-        NO<T>* proximo = aux->getProximo();
+        NO<L>* anterior = aux->getAnterior();
+        NO<L>* proximo = aux->getProximo();
         anterior->setProximo(proximo);
         proximo->setAnterior(anterior);
-        T valor = aux->getDado();
+        L valor = aux->getDado();
         delete aux;
         --quantidadeElementos;
         return valor;
