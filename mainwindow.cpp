@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     TabHash<QString> tabela;
-    tabela.calcularNPrimo(1000);
 }
 
 MainWindow::~MainWindow()

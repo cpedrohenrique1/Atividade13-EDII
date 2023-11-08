@@ -1,7 +1,7 @@
 #ifndef NO_H
 #define NO_H
 
-template <class T>
+template <typename T>
 class NO
 {
 private:

@@ -4,7 +4,7 @@
 #include "lista.h"
 #include <cmath>
 
-template <class T>
+template <typename T>
 class TabHash
 {
 private:

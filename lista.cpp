@@ -1,32 +1,32 @@
 #include "lista.h"
 
-template<class T>
+template<typename T>
 Lista<T>::Lista() : inicio(0),
                     fim(0),
                     quantidadeElementos(0)
 {}
 
-template<class T>
+template<typename T>
 bool Lista<T>::estaVazia() const{
     return !(bool(quantidadeElementos));
 }
 
-template<class T>
+template<typename T>
 int Lista<T>::getQuantidadeElementos() const{
     return quantidadeElementos;
 }
 
-template<class T>
+template<typename T>
 T Lista<T>::acessarFim()const{
     return fim;
 }
 
-template<class T>
+template<typename T>
 T Lista<T>::acessarInicio()const{
     return inicio;
 }
 
-template<class T>
+template<typename T>
 T Lista<T>::acessarPosicao(int posicao)const{
     if (posicao < 0 || posicao >= quantidadeElementos){
         throw QString("A posicao nao pode ser maior que a quantidade de elementos e nem menor que 0");
@@ -38,7 +38,7 @@ T Lista<T>::acessarPosicao(int posicao)const{
     return elemento->getDado();
 }
 
-template<class T>
+template<typename T>
 void Lista<T>::inserirFim(T entrada){
     if (estaVazia()){
         inserirInicio(entrada);
@@ -55,7 +55,7 @@ void Lista<T>::inserirFim(T entrada){
     }
 }
 
-template<class T>
+template<typename T>
 void Lista<T>::inserirInicio(T entrada){
     try{
         NO<T>* newElemento = new NO<T>(entrada);
@@ -73,7 +73,7 @@ void Lista<T>::inserirInicio(T entrada){
     }
 }
 
-template<class T>
+template<typename T>
 void Lista<T>::inserirPosicao(int posicao, T entrada){
     if (posicao < 0 || posicao > quantidadeElementos){
         throw QString("Posicao invalida, nao pode ser menor que 0 ou maior que a quantidade de elementos");
@@ -111,7 +111,7 @@ void Lista<T>::inserirPosicao(int posicao, T entrada){
     }
 }
 
-template<class T>
+template<typename T>
 T Lista<T>::retirarInicio(){
     if (estaVazia()){
         throw QString("Lista ja vazia, nao foi possivel retirar");
@@ -132,7 +132,7 @@ T Lista<T>::retirarInicio(){
     return valor;
 }
 
-template<class T>
+template<typename T>
 T Lista<T>::retirarFim(){
     if (estaVazia()){
         throw QString("Lista ja vazia, nao foi possivel retirar");
@@ -150,7 +150,7 @@ T Lista<T>::retirarFim(){
     return valor;
 }
 
-template<class T>
+template<typename T>
 T Lista<T>::retirarPosicao(int posicao){
     if (estaVazia()){
         throw QString("Lista ja vazia, nao foi possivel retirar");

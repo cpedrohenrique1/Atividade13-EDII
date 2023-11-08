@@ -5,7 +5,7 @@
 #include <iostream>
 #include <QString>
 
-template <class T>
+template <typename T>
 class Lista
 {
 private:
