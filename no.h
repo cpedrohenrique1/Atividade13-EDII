@@ -9,14 +9,38 @@ private:
     NO* proximo;
     NO* anterior;
 public:
-    NO();
-    NO(T newDado);
-    T getDado()const;
-    void setDado(T newDado);
-    NO* getProximo()const;
-    void setProximo(NO* newProximo);
-    NO* getAnterior()const;
-    void setAnterior(NO* newAnterior);
+    NO() :  proximo(0),
+            anterior(0)
+    {}
+
+    NO(T newDado) :     dado(newDado),
+                        proximo(0),
+                        anterior(0)
+    {}
+
+    T getDado()const{
+        return dado;
+    }
+    
+    void setDado(T newDado){
+        dado = newDado;
+    }
+    
+    NO* getProximo()const{
+        return proximo;
+    }
+    
+    void setProximo(NO* newProximo){
+        proximo = newProximo;
+    }
+    
+    NO* getAnterior()const{
+        return anterior;
+    }
+    
+    void setAnterior(NO* newAnterior){
+        anterior = newAnterior;
+    }
 };
 
 #endif // NO_H
