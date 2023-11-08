@@ -10,8 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
-    tabhash.cpp
+    mainwindow.cpp
 
 HEADERS += \
     lista.h \
