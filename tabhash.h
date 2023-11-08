@@ -15,14 +15,14 @@ public:
                     tabela(0)
     {}
 
-    TabHash(int tamanhoTabela) :    tamanhoTabela(0),
-                                    tabela(0)
+    TabHash(int tamanhoTabela, int colisoes) :  tamanhoTabela(0),
+                                                tabela(0)
     {
         if (tamanhoTabela <= 0){
             throw QString("Nao foi possivel, tamanho invalido");
         }
         try{
-            tabela = new Lista<L>[calcularNPrimo(tamanhoTabela)];
+            tabela = new Lista<L>[calcularNPrimo(tamanhoTabela, colisoes)];
         }catch(std::bad_alloc &e){
             throw QString("nao foi possivel alocar memoria");
         }
@@ -34,10 +34,10 @@ public:
     
     L Consultar(int chave);
     
-    int calcularNPrimo(const int& entrada){
-        int divisao = entrada / 3;
+    int calcularNPrimo(const int& entrada, int colisoes){
+        int divisao = entrada / colisoes;
         int max = 0;
-        for (int i = tamanhoTabela; i <= sqrt(divisao); ++i){
+        for (int i = divisao; i <= sqrt(divisao); ++i){
             int div = 0;
             for (int j = 2; j < sqrt(i); ++j){
                 if (i%j == 0){
