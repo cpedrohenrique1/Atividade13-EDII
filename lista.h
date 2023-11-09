@@ -71,7 +71,7 @@ public:
     
     void inserirFim(L entrada, int chave){
         if (estaVazia()){
-            inserirInicio(entrada);
+            inserirInicio(entrada, chave);
             return;
         }
         try{
@@ -110,11 +110,11 @@ public:
             throw QString("Posicao invalida, nao pode ser menor que 0 ou maior que a quantidade de elementos");
         }
         if (posicao == 0 || estaVazia()){
-            inserirInicio(entrada);
+            inserirInicio(entrada, chave);
             return;
         }
         if (posicao == quantidadeElementos){
-            inserirFim(entrada);
+            inserirFim(entrada, chave);
             return;
         }
         try{
