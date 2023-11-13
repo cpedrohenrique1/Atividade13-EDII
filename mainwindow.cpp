@@ -99,9 +99,13 @@ void MainWindow::on_pushButton_consultar_clicked()
         bool ok;
         QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
         int matricula = ui->lineEdit_matricula->text().toInt(&ok);
-        if (ok)
-            QMessageBox::about(this, "Concluido", "Matricula: " + QString::number(matricula) + "\nNome Completo: " + tabela->buscaElemento(matricula));
-        else
+        if (ok){
+            nomeCompleto = tabela->buscaElemento(matricula);
+            if (nomeCompleto == "")
+                QMessageBox::about(this, "Problema", "Nao foi encontrado");
+            else
+                QMessageBox::about(this, "Concluido", "Matricula: " + QString::number(matricula) + "\nNome Completo: " + tabela->buscaElemento(matricula));
+        }else
             tabela->atualizar();
     }
     catch(QString &e){
