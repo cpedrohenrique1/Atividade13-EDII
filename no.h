@@ -8,26 +8,18 @@ class NO
 {
 private:
     L dado;
-    int chave;
     NO* proximo;
     NO* anterior;
 public:
     NO() :  dado(),
-            chave(0),
             proximo(0),
             anterior(0)
     {}
 
-    NO(L newDado, int chave) :  dado(newDado),
-                                chave(0),
-                                proximo(0),
-                                anterior(0)
-    {
-        if (chave < 0){
-            throw QString("Chave invalida");
-        }
-        this->chave = chave;
-    }
+    NO(L newDado) :     dado(newDado),
+                        proximo(0),
+                        anterior(0)
+    {}
 
     L getDado()const{
         return dado;
@@ -51,17 +43,6 @@ public:
     
     void setAnterior(NO* newAnterior){
         anterior = newAnterior;
-    }
-
-    void setChave(int chave){
-        if (chave < 0){
-            throw QString("Chave invalida");
-        }
-        this->chave = chave;
-    }
-
-    int getChave()const{
-        return chave;
     }
 };
 

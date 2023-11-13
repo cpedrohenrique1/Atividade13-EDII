@@ -17,7 +17,7 @@ public:
                 inicio(0),
                 fim(0)
     {}
-    
+
     ~Lista(){
         while (!estaVazia()){
             retirarInicio();
@@ -28,9 +28,9 @@ public:
         return !(bool(quantidadeElementos));
     }
     
-    void inserirInicio(L entrada, int chave){
+    void inserirInicio(L entrada){
         try{
-            NO<L>* newElemento = new NO<L>(entrada, chave);
+            NO<L>* newElemento = new NO<L>(entrada);
             if (estaVazia()){
                 inicio = fim = newElemento;
                 ++quantidadeElementos;
@@ -69,13 +69,13 @@ public:
         return valor;
     }
     
-    void inserirFim(L entrada, int chave){
+    void inserirFim(L entrada){
         if (estaVazia()){
-            inserirInicio(entrada, chave);
+            inserirInicio(entrada);
             return;
         }
         try{
-            NO<L>* newElemento = new NO<L>(entrada, chave);
+            NO<L>* newElemento = new NO<L>(entrada);
             newElemento->setAnterior(fim);
             fim->setProximo(newElemento);
             fim = newElemento;
@@ -105,20 +105,20 @@ public:
         return valor;
     }
     
-    void inserirPosicao(int posicao, L entrada, int chave){
+    void inserirPosicao(int posicao, L entrada){
         if (posicao < 0 || posicao > quantidadeElementos){
             throw QString("Posicao invalida, nao pode ser menor que 0 ou maior que a quantidade de elementos");
         }
         if (posicao == 0 || estaVazia()){
-            inserirInicio(entrada, chave);
+            inserirInicio(entrada);
             return;
         }
         if (posicao == quantidadeElementos){
-            inserirFim(entrada, chave);
+            inserirFim(entrada);
             return;
         }
         try{
-            NO<L>* newElemento = new NO<L>(entrada, chave);
+            NO<L>* newElemento = new NO<L>(entrada);
             NO<L>* aux;
             if (posicao < quantidadeElementos / 2){
                 aux = inicio;
