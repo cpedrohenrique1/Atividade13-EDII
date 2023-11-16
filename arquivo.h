@@ -1,17 +1,18 @@
 #ifndef ARQUIVO_H
 #define ARQUIVO_H
 
-#include "tabhash.h"
+#include "tabhashaluno.h"
 #include <QFile>
 #include <QTextStream>
+#include "aluno.h"
 
 class Arquivo
 {
 private:
-    TabHash<QString> *vetor;
+    TabHashAluno *vetor;
 public:
     Arquivo();
-    Arquivo(TabHash<QString> *entrada);
+    Arquivo(TabHashAluno *entrada);
     void abrir();
     void carregar_elementos(QTextStream &in);
 };

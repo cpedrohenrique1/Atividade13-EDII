@@ -3,27 +3,27 @@
 
 #include "QTableWidget"
 #include "QHeaderView"
-#include "tabhash.h"
+#include "tabhashaluno.h"
 
 class Tabela
 {
 private:
     QTableWidget *tabela;
-    TabHash<QString> *vetor;
+    TabHashAluno *vetor;
     int tamanho_tabela;
 
 public:
     Tabela();
-    Tabela(QTableWidget *parent, int tamanho, int colisoes);
+    Tabela(QTableWidget *parent, const int& tamanho, const int& colisoes);
     ~Tabela();
     void start();
     void limpar();
     void atualizar();
     QString buscaElemento(const int& matricula);
-    void inserirElemento(int& matricula, QString& nomeCompleto);
-    void alterarElemento(int& matricula, QString& nomeCompleto);
-    void removerElemento(int& matricula);
-    TabHash<QString> *getVetor()const;
+    void inserirElemento(const int& matricula, const QString& nomeCompleto);
+    void alterarElemento(const int& matricula, const QString& nomeCompleto);
+    void removerElemento(const int& matricula);
+    TabHashAluno *getVetor()const;
     int getTamanhoTabela()const;
 };
 

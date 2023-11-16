@@ -13,7 +13,8 @@ SOURCES += \
     arquivo.cpp \
     main.cpp \
     mainwindow.cpp \
-    tabela.cpp
+    tabela.cpp \
+    tabhashaluno.cpp
 
 HEADERS += \
     aluno.h \
@@ -22,7 +23,8 @@ HEADERS += \
     mainwindow.h \
     no.h \
     tabela.h \
-    tabhash.h
+    tabhash.h \
+    tabhashaluno.h
 
 FORMS += \
     mainwindow.ui

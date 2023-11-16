@@ -7,7 +7,7 @@
 template <class L>
 class TabHash
 {
-private:
+protected:
     Lista<L> **tabela;
     int tamanhoTabela;
 public:
@@ -33,72 +33,17 @@ public:
         }
     }
 
-    ~TabHash(){
-        for (int i = 0; i < tamanhoTabela; ++i){
-            delete tabela[i];
-        }
-        delete[] tabela;
-    }
+    virtual ~TabHash() = 0;
 
     int getTamanhoTabela()const{
         return tamanhoTabela;
     }
     
-    void IncluirDados(L entrada, int chave){
-        if (!tabela || tamanhoTabela <= 0){
-            throw QString("Tabela nao alocada");
-        }
-        if (chave < 0){
-            throw QString("Chave invalida");
-        }
-        int temp = chave;
-        chave %= tamanhoTabela;
-        if (chave >= tamanhoTabela){
-            throw QString("Chave invalida");
-        }
-        tabela[chave].inserirInicio(entrada, temp);
-    }
+    virtual void IncluirDados(L entrada) = 0;
     
-    void ExcluirDados(int chave){
-        if (!tabela || tamanhoTabela <= 0){
-            throw QString("Tabela nao alocada");
-        }
-        int temp = chave;
-        chave %= tamanhoTabela;
-        if (chave < 0 || chave >= tamanhoTabela){
-            throw QString("Chave invalida");
-        }
-        NO<L>* iterator = tabela[chave].acessarInicio();
-        for (int i = 0; i < tabela[chave].getQuantidadeElementos(); ++i){
-            if (iterator->getChave() == temp){
-                tabela[chave].retirarPosicao(i);
-                return;
-            }
-            iterator = iterator->getProximo();
-        }
-    }
+    virtual void ExcluirDados(int chave) = 0;
     
-    L Consultar(int chave){
-        if (!tabela || tamanhoTabela <= 0){
-            throw QString("Tabela nao alocada");
-        }
-        if (chave < 0){
-            throw QString("Chave invalida");
-        }
-        int temp = chave;
-        chave %= tamanhoTabela;
-        if (chave >= tamanhoTabela){
-            throw QString("Chave invalida");
-        }
-        NO<L>* iterator = tabela[chave].acessarInicio();
-        for (int i = 0; i < tabela[chave].getQuantidadeElementos(); ++i){
-            if (iterator->getChave() == temp){
-                return iterator->getDado();
-            }
-            iterator = iterator->getProximo();
-        }
-        return L();
-    }
+    virtual L Consultar(int chave) = 0;
     
     int calcularNPrimo(const int& entrada, int colisoes){
         if (entrada <= 0){

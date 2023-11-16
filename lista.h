@@ -146,9 +146,18 @@ public:
         if (posicao < 0 || posicao >= quantidadeElementos){
             throw QString("A posicao nao pode ser maior que a quantidade de elementos e nem menor que 0");
         }
-        NO<L>* elemento = inicio;
-        for (int i = 0; i < posicao; ++i){
-            elemento = elemento->getProximo();
+        NO<L>* elemento;
+        if (posicao < quantidadeElementos / 2){
+            elemento = inicio;
+            for (int i = 0; i < posicao; ++i){
+                elemento = elemento->getProximo();
+            }
+        }
+        else{
+            elemento = fim;
+            for (int i = quantidadeElementos - 1; i > posicao; --i){
+                elemento = elemento->getAnterior();
+            }
         }
         return elemento->getDado();
     }
@@ -174,7 +183,7 @@ public:
             }
         }else{
             aux = fim;
-            for (int i = 0; i > posicao; --i){
+            for (int i = quantidadeElementos - 1; i > posicao; --i){
                 aux = aux->getAnterior();
             }
         }

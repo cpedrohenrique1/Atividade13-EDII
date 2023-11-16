@@ -3,7 +3,7 @@
 Arquivo::Arquivo(): vetor(0)
 {}
 
-Arquivo::Arquivo(TabHash<QString>* entrada):     vetor(0)
+Arquivo::Arquivo(TabHashAluno* entrada):     vetor(0)
 {
     if (!entrada)
         throw QString("Vetor nao criado");
@@ -34,6 +34,7 @@ void Arquivo::carregar_elementos(QTextStream &in)
         QStringList parts = linha.split(";");
         int matricula = parts[0].toInt();
         QString nome = parts[1];
-        vetor->IncluirDados(nome, matricula);
+        Aluno aluno(matricula, nome);
+        vetor->IncluirDados(aluno);
     }
 }
