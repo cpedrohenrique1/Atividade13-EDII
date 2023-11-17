@@ -33,17 +33,71 @@ public:
         }
     }
 
-    virtual ~TabHash() = 0;
+    ~TabHash(){
+        for (int i = 0; i < tamanhoTabela; ++i){
+            delete tabela[i];
+        }
+        delete[] tabela;
+    }
 
     int getTamanhoTabela()const{
         return tamanhoTabela;
     }
+
+    virtual int getChave(L entrada)const = 0;
     
-    virtual void IncluirDados(L entrada) = 0;
+    void IncluirDados(L entrada){
+        if (!tabela || tamanhoTabela <= 0){
+            throw QString("Tabela nao alocada");
+        }
+        int chave = getChave(entrada);
+        chave %= tamanhoTabela;
+        if (chave >= tamanhoTabela){
+            throw QString("Chave invalida");
+        }
+        tabela[chave]->inserirInicio(entrada);
+    }
     
-    virtual void ExcluirDados(int chave) = 0;
+    void ExcluirDados(int chave){
+        if (!tabela || tamanhoTabela <= 0){
+            throw QString("Tabela nao alocada");
+        }
+        int temp = chave;
+        chave %= tamanhoTabela;
+        if (chave < 0 || chave >= tamanhoTabela){
+            throw QString("Chave invalida");
+        }
+        NO<L>* iterator = tabela[chave]->acessarInicio();
+        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i){
+            if (getChave(iterator->getDado()) == temp){
+                tabela[chave]->retirarPosicao(i);
+                return;
+            }
+            iterator = iterator->getProximo();
+        }
+    }
     
-    virtual L Consultar(int chave) = 0;
+    L Consultar(int chave){
+        if (!tabela || tamanhoTabela <= 0){
+            throw QString("Tabela nao alocada");
+        }
+        if (chave < 0){
+            throw QString("Chave invalida");
+        }
+        int temp = chave;
+        chave %= tamanhoTabela;
+        if (chave >= tamanhoTabela){
+            throw QString("Chave invalida");
+        }
+        NO<L>* iterator = tabela[chave]->acessarInicio();
+        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i){
+            if (getChave(iterator->getDado()) == temp){
+                return iterator->getDado();
+            }
+            iterator = iterator->getProximo();
+        }
+        return L();
+    }
     
     int calcularNPrimo(const int& entrada, int colisoes){
         if (entrada <= 0){

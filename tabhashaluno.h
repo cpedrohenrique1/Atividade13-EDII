@@ -9,10 +9,7 @@ class TabHashAluno : public TabHash<Aluno>
 public:
     TabHashAluno();
     TabHashAluno(int TamanhoTabela, int colisao);
-    ~TabHashAluno() override;
-    Aluno Consultar(int chave) override;
-    void IncluirDados(Aluno entrada) override;
-    void ExcluirDados(int chave) override;
+    int getChave(Aluno entrada)const override;
 };
 
 #endif // TABHASHALUNO_H
