@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
         arquivo.abrir();
         tabela->atualizar();
     }catch(std::bad_alloc &e){
-        QMessageBox::information(this, "ERRO", e.what());
+        QMessageBox::information(this, "ERRO", "Erro ao alocar memoria");
     }
     catch(QString &e){
         QMessageBox::information(this, "ERRO", e);
@@ -39,8 +39,8 @@ void MainWindow::on_pushButton_inserir_clicked()
         QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
         if (!ok)
             throw QString("matricula nao pode estar vazia");
-        
         tabela->inserirElemento(matricula, nomeCompleto);
+        tabela->atualizar();
         QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + "\nNome Completo:" + tabela->buscaElemento(matricula) +" inserido");
     }
     catch(QString &e){
@@ -62,6 +62,7 @@ void MainWindow::on_pushButton_alterar_clicked()
         if (!ok)
             throw QString("n° matricula nao pode estar vazio");
         tabela->alterarElemento(matricula, nomeCompleto);
+        tabela->atualizar();
         QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + " alterado");
     }
     catch(QString &e){
@@ -82,6 +83,7 @@ void MainWindow::on_pushButton_remover_clicked()
         if (!ok)
             throw QString("n° matricula nao pode estar vazio");
         tabela->removerElemento(matricula);
+        tabela->atualizar();
         QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + " removido");
     }
     catch(QString &e){
@@ -105,8 +107,9 @@ void MainWindow::on_pushButton_consultar_clicked()
                 QMessageBox::about(this, "Problema", "Nao foi encontrado");
             else
                 QMessageBox::about(this, "Concluido", "Matricula: " + QString::number(matricula) + "\nNome Completo: " + tabela->buscaElemento(matricula));
-        }else
-            tabela->atualizar();
+        }else{
+            throw QString("n° matricula invalido");
+        }
     }
     catch(QString &e){
         QMessageBox::critical(this, "Erro", e);
