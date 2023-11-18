@@ -20,9 +20,9 @@ public:
     TabHash(const int &tamanhoTabela, const int &colisoes) : tabela(0),
                                                              tamanhoTabela(0)
     {
-        if (tamanhoTabela <= 0 || colisoes < 0)
+        if (tamanhoTabela <= 0 || colisoes <= 0)
         {
-            throw QString("Nao foi possivel, tamanho invalido ou colisoes negativas");
+            throw QString("Nao foi possivel, tamanho invalido ou colisao invalida");
         }
         this->tamanhoTabela = calcularNPrimo(tamanhoTabela, colisoes);
         try
@@ -47,11 +47,13 @@ public:
             if (tabela[i])
             {
                 delete tabela[i];
+                tabela[i] = 0;
             }
         }
         if (tabela)
         {
             delete[] tabela;
+            tabela = 0;
         }
     }
 

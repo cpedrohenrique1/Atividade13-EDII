@@ -14,7 +14,7 @@ Tabela::Tabela(QTableWidget *parent, const int &tamanho, const int &colisoes) : 
         throw QString("tabela nao criada");
     if (tamanho <= 0)
         throw QString("tamanho invalido");
-    if (colisoes < 0)
+    if (colisoes <= 0)
         throw QString("numero de colisoes invalido");
     this->tamanho_tabela = tamanho;
     this->tabela = parent;
