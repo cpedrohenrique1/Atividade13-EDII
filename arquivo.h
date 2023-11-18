@@ -10,6 +10,7 @@ class Arquivo
 {
 private:
     TabHashAluno *vetor;
+
 public:
     Arquivo();
     Arquivo(TabHashAluno *entrada);

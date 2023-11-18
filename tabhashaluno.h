@@ -9,7 +9,7 @@ class TabHashAluno : public TabHash<Aluno>
 public:
     TabHashAluno();
     TabHashAluno(int TamanhoTabela, int colisao);
-    int getChave(Aluno entrada)const override;
+    int getChave(Aluno entrada) const override;
 };
 
 #endif // TABHASHALUNO_H

@@ -10,28 +10,36 @@ class Lista
 {
 private:
     int quantidadeElementos;
-    NO<L>* inicio;
-    NO<L>* fim;
-public:
-    Lista() :   quantidadeElementos(0),
-                inicio(0),
-                fim(0)
-    {}
+    NO<L> *inicio;
+    NO<L> *fim;
 
-    ~Lista(){
-        while (!estaVazia()){
+public:
+    Lista() : quantidadeElementos(0),
+              inicio(0),
+              fim(0)
+    {
+    }
+
+    ~Lista()
+    {
+        while (!estaVazia())
+        {
             retirarInicio();
         }
     }
-    
-    bool estaVazia() const{
+
+    bool estaVazia() const
+    {
         return !(bool(quantidadeElementos));
     }
-    
-    void inserirInicio(L entrada){
-        try{
-            NO<L>* newElemento = new NO<L>(entrada);
-            if (estaVazia()){
+
+    void inserirInicio(L entrada)
+    {
+        try
+        {
+            NO<L> *newElemento = new NO<L>(entrada);
+            if (estaVazia())
+            {
                 inicio = fim = newElemento;
                 ++quantidadeElementos;
                 return;
@@ -40,21 +48,27 @@ public:
             newElemento->setProximo(inicio);
             inicio = newElemento;
             ++quantidadeElementos;
-        }catch(std::bad_alloc &e){
+        }
+        catch (std::bad_alloc &e)
+        {
             throw QString("Erro ao inserir no inicio, nao foi possivel alocar memoria");
         }
     }
 
-    NO<L>* acessarInicio() const{
+    NO<L> *acessarInicio() const
+    {
         return inicio;
     }
-    
-    L retirarInicio(){
-        if (estaVazia()){
+
+    L retirarInicio()
+    {
+        if (estaVazia())
+        {
             throw QString("Lista ja vazia, nao foi possivel retirar");
         }
-        NO<L>* aux = inicio;
-        if (quantidadeElementos == 1){
+        NO<L> *aux = inicio;
+        if (quantidadeElementos == 1)
+        {
             quantidadeElementos = 0;
             inicio = fim = 0;
             L valor = aux->getDado();
@@ -68,35 +82,44 @@ public:
         --quantidadeElementos;
         return valor;
     }
-    
-    void inserirFim(L entrada){
-        if (estaVazia()){
+
+    void inserirFim(L entrada)
+    {
+        if (estaVazia())
+        {
             inserirInicio(entrada);
             return;
         }
-        try{
-            NO<L>* newElemento = new NO<L>(entrada);
+        try
+        {
+            NO<L> *newElemento = new NO<L>(entrada);
             newElemento->setAnterior(fim);
             fim->setProximo(newElemento);
             fim = newElemento;
             ++quantidadeElementos;
-        }catch(std::bad_alloc &e){
+        }
+        catch (std::bad_alloc &e)
+        {
             throw QString("Erro ao inserir no fim, nao foi possivel alocar memoria");
         }
     }
-    
-    NO<L>* acessarFim() const{
+
+    NO<L> *acessarFim() const
+    {
         return fim;
     }
-    
-    L retirarFim(){
-        if (estaVazia()){
+
+    L retirarFim()
+    {
+        if (estaVazia())
+        {
             throw QString("Lista ja vazia, nao foi possivel retirar");
         }
-        if (quantidadeElementos == 1){
+        if (quantidadeElementos == 1)
+        {
             return retirarInicio();
         }
-        NO<L>* aux = fim;
+        NO<L> *aux = fim;
         L valor = fim->getDado();
         fim = fim->getAnterior();
         fim->setProximo(0);
@@ -104,91 +127,119 @@ public:
         --quantidadeElementos;
         return valor;
     }
-    
-    void inserirPosicao(int posicao, L entrada){
-        if (posicao < 0 || posicao > quantidadeElementos){
+
+    void inserirPosicao(int posicao, L entrada)
+    {
+        if (posicao < 0 || posicao > quantidadeElementos)
+        {
             throw QString("Posicao invalida, nao pode ser menor que 0 ou maior que a quantidade de elementos");
         }
-        if (posicao == 0 || estaVazia()){
+        if (posicao == 0 || estaVazia())
+        {
             inserirInicio(entrada);
             return;
         }
-        if (posicao == quantidadeElementos){
+        if (posicao == quantidadeElementos)
+        {
             inserirFim(entrada);
             return;
         }
-        try{
-            NO<L>* newElemento = new NO<L>(entrada);
-            NO<L>* aux;
-            if (posicao < quantidadeElementos / 2){
+        try
+        {
+            NO<L> *newElemento = new NO<L>(entrada);
+            NO<L> *aux;
+            if (posicao < quantidadeElementos / 2)
+            {
                 aux = inicio;
-                for (int i = 0; i < posicao; ++i){
+                for (int i = 0; i < posicao; ++i)
+                {
                     aux = aux->getProximo();
                 }
-            }else{
+            }
+            else
+            {
                 aux = fim;
-                for (int i = quantidadeElementos - 1; i > posicao; --i){
+                for (int i = quantidadeElementos - 1; i > posicao; --i)
+                {
                     aux = aux->getAnterior();
                 }
             }
-            NO<L>* anterior = aux->getAnterior();
+            NO<L> *anterior = aux->getAnterior();
             anterior->setProximo(newElemento);
             newElemento->setProximo(aux);
             newElemento->setAnterior(anterior);
             aux->setAnterior(newElemento);
             ++quantidadeElementos;
-        }catch(std::bad_alloc &e){
+        }
+        catch (std::bad_alloc &e)
+        {
             throw QString("Erro ao inserir no inicio, nao foi possivel alocar memoria");
         }
     }
-    
-    L acessarPosicao(int posicao) const{
-        if (posicao < 0 || posicao >= quantidadeElementos){
+
+    L acessarPosicao(int posicao) const
+    {
+        if (posicao < 0 || posicao >= quantidadeElementos)
+        {
             throw QString("A posicao nao pode ser maior que a quantidade de elementos e nem menor que 0");
         }
-        NO<L>* elemento;
-        if (posicao < quantidadeElementos / 2){
+        NO<L> *elemento;
+        if (posicao < quantidadeElementos / 2)
+        {
             elemento = inicio;
-            for (int i = 0; i < posicao; ++i){
+            for (int i = 0; i < posicao; ++i)
+            {
                 elemento = elemento->getProximo();
             }
         }
-        else{
+        else
+        {
             elemento = fim;
-            for (int i = quantidadeElementos - 1; i > posicao; --i){
+            for (int i = quantidadeElementos - 1; i > posicao; --i)
+            {
                 elemento = elemento->getAnterior();
             }
         }
         return elemento->getDado();
     }
-    
-    L retirarPosicao(int posicao){
-        if (estaVazia()){
+
+    L retirarPosicao(int posicao)
+    {
+        if (estaVazia())
+        {
             throw QString("Lista ja vazia, nao foi possivel retirar");
         }
-        if (posicao < 0 || posicao >= quantidadeElementos){
+        if (posicao < 0 || posicao >= quantidadeElementos)
+        {
             throw QString("Posicao invalida, nao pode ser menor que 0 ou maior igual que a quantidade de elementos");
         }
-        if (quantidadeElementos == 1 || posicao == 0){
+        if (quantidadeElementos == 1 || posicao == 0)
+        {
             return retirarInicio();
         }
-        if (posicao == quantidadeElementos - 1){
+        if (posicao == quantidadeElementos - 1)
+        {
             return retirarFim();
         }
-        NO<L>* aux;
-        if (posicao < quantidadeElementos / 2){
+        NO<L> *aux;
+        if (posicao < quantidadeElementos / 2)
+        {
             aux = inicio;
-            for (int i = 0; i < posicao; ++i){
+            for (int i = 0; i < posicao; ++i)
+            {
                 aux = aux->getProximo();
             }
-        }else{
+        }
+        else
+        {
             aux = fim;
-            for (int i = quantidadeElementos - 1; i > posicao; --i){
+            for (int i = quantidadeElementos - 1; i > posicao; --i)
+            {
                 aux = aux->getAnterior();
             }
         }
-        NO<L>* anterior = aux->getAnterior();
-        NO<L>* proximo = aux->getProximo();
+        NO<L> *anterior = aux->getAnterior();
+        NO<L> *proximo = aux->getProximo();
         anterior->setProximo(proximo);
         proximo->setAnterior(anterior);
         L valor = aux->getDado();
@@ -196,8 +247,9 @@ public:
         --quantidadeElementos;
         return valor;
     }
-    
-    int getQuantidadeElementos() const{
+
+    int getQuantidadeElementos() const
+    {
         return quantidadeElementos;
     }
 };

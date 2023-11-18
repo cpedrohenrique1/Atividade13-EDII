@@ -10,110 +10,139 @@ class TabHash
 protected:
     Lista<L> **tabela;
     int tamanhoTabela;
-public:
-    TabHash() :     tabela(0),
-                    tamanhoTabela(0)
-    {}
 
-    TabHash(int tamanhoTabela, int colisoes) :  tabela(0),
-                                                tamanhoTabela(0)
+public:
+    TabHash() : tabela(0),
+                tamanhoTabela(0)
     {
-        if (tamanhoTabela <= 0 || colisoes < 0){
+    }
+
+    TabHash(int tamanhoTabela, int colisoes) : tabela(0),
+                                               tamanhoTabela(0)
+    {
+        if (tamanhoTabela <= 0 || colisoes < 0)
+        {
             throw QString("Nao foi possivel, tamanho invalido ou colisoes negativas");
         }
         this->tamanhoTabela = calcularNPrimo(tamanhoTabela, colisoes);
-        try{
-            tabela = new Lista<L>*[this->tamanhoTabela];
-            
-            for (int i = 0; i < this->tamanhoTabela; ++i){
+        try
+        {
+            tabela = new Lista<L> *[this->tamanhoTabela];
+
+            for (int i = 0; i < this->tamanhoTabela; ++i)
+            {
                 tabela[i] = new Lista<L>;
             }
-        }catch(std::bad_alloc &e){
+        }
+        catch (std::bad_alloc &e)
+        {
             throw QString("nao foi possivel alocar memoria");
         }
     }
 
-    ~TabHash(){
-        for (int i = 0; i < tamanhoTabela; ++i){
+    ~TabHash()
+    {
+        for (int i = 0; i < tamanhoTabela; ++i)
+        {
             delete tabela[i];
         }
         delete[] tabela;
     }
 
-    int getTamanhoTabela()const{
+    int getTamanhoTabela() const
+    {
         return tamanhoTabela;
     }
 
-    virtual int getChave(L entrada)const = 0;
-    
-    void IncluirDados(L entrada){
-        if (!tabela || tamanhoTabela <= 0){
+    virtual int getChave(L entrada) const = 0;
+
+    void IncluirDados(L entrada)
+    {
+        if (!tabela || tamanhoTabela <= 0)
+        {
             throw QString("Tabela nao alocada");
         }
         int chave = getChave(entrada);
         chave %= tamanhoTabela;
-        if (chave >= tamanhoTabela){
+        if (chave >= tamanhoTabela)
+        {
             throw QString("Chave invalida");
         }
         tabela[chave]->inserirInicio(entrada);
     }
-    
-    void ExcluirDados(int chave){
-        if (!tabela || tamanhoTabela <= 0){
+
+    void ExcluirDados(int chave)
+    {
+        if (!tabela || tamanhoTabela <= 0)
+        {
             throw QString("Tabela nao alocada");
         }
         int temp = chave;
         chave %= tamanhoTabela;
-        if (chave < 0 || chave >= tamanhoTabela){
+        if (chave < 0 || chave >= tamanhoTabela)
+        {
             throw QString("Chave invalida");
         }
-        NO<L>* iterator = tabela[chave]->acessarInicio();
-        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i){
-            if (getChave(iterator->getDado()) == temp){
+        NO<L> *iterator = tabela[chave]->acessarInicio();
+        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i)
+        {
+            if (getChave(iterator->getDado()) == temp)
+            {
                 tabela[chave]->retirarPosicao(i);
                 return;
             }
             iterator = iterator->getProximo();
         }
     }
-    
-    L Consultar(int chave){
-        if (!tabela || tamanhoTabela <= 0){
+
+    L Consultar(int chave)
+    {
+        if (!tabela || tamanhoTabela <= 0)
+        {
             throw QString("Tabela nao alocada");
         }
-        if (chave < 0){
+        if (chave < 0)
+        {
             throw QString("Chave invalida");
         }
         int temp = chave;
         chave %= tamanhoTabela;
-        if (chave >= tamanhoTabela){
+        if (chave >= tamanhoTabela)
+        {
             throw QString("Chave invalida");
         }
-        NO<L>* iterator = tabela[chave]->acessarInicio();
-        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i){
-            if (getChave(iterator->getDado()) == temp){
+        NO<L> *iterator = tabela[chave]->acessarInicio();
+        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i)
+        {
+            if (getChave(iterator->getDado()) == temp)
+            {
                 return iterator->getDado();
             }
             iterator = iterator->getProximo();
         }
         return L();
     }
-    
-    int calcularNPrimo(const int& entrada, int colisoes){
-        if (entrada <= 0){
+
+    int calcularNPrimo(const int &entrada, int colisoes)
+    {
+        if (entrada <= 0)
+        {
             throw QString("Tamanho invalido");
         }
-        if (colisoes == 0){
+        if (colisoes == 0)
+        {
             throw QString("Nao foi possivel dividir por 0");
         }
         int divisao = entrada / colisoes;
         int max = 0;
-        for(int i = 2 ; i <= entrada && max < divisao ; ++i){
+        for (int i = 2; i <= entrada && max < divisao; ++i)
+        {
             bool div = false;
-            for(int j = 2 ; j <= sqrt(i) && !div ; ++j)
-                if(i % j == 0)
+            for (int j = 2; j <= sqrt(i) && !div; ++j)
+                if (i % j == 0)
                     div = true;
-            if(!div){
+            if (!div)
+            {
                 max = i;
             }
         }
