@@ -44,9 +44,15 @@ public:
     {
         for (int i = 0; i < tamanhoTabela; ++i)
         {
-            delete tabela[i];
+            if (tabela[i])
+            {
+                delete tabela[i];
+            }
         }
-        delete[] tabela;
+        if (tabela)
+        {
+            delete[] tabela;
+        }
     }
 
     int getTamanhoTabela() const
