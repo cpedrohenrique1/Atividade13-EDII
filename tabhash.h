@@ -17,8 +17,8 @@ public:
     {
     }
 
-    TabHash(int tamanhoTabela, int colisoes) : tabela(0),
-                                               tamanhoTabela(0)
+    TabHash(const int &tamanhoTabela, const int &colisoes) : tabela(0),
+                                                             tamanhoTabela(0)
     {
         if (tamanhoTabela <= 0 || colisoes < 0)
         {
@@ -60,9 +60,9 @@ public:
         return tamanhoTabela;
     }
 
-    virtual int getChave(L entrada) const = 0;
+    virtual int getChave(const L &entrada) const = 0;
 
-    void IncluirDados(L entrada)
+    void IncluirDados(const L &entrada)
     {
         if (!tabela || tamanhoTabela <= 0)
         {
@@ -129,7 +129,7 @@ public:
         return L();
     }
 
-    int calcularNPrimo(const int &entrada, int colisoes)
+    int calcularNPrimo(const int &entrada, const int &colisoes)
     {
         if (entrada <= 0)
         {

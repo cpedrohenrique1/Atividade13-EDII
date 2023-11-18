@@ -5,8 +5,8 @@ Aluno::Aluno() : chave(0),
 {
 }
 
-Aluno::Aluno(int chave, QString nome) : chave(0),
-                                        nome("")
+Aluno::Aluno(const int &chave, const QString &nome) : chave(0),
+                                                      nome("")
 {
     if (chave < 0)
         throw QString("Chave invalida");
@@ -16,14 +16,14 @@ Aluno::Aluno(int chave, QString nome) : chave(0),
     this->nome = nome.toUpper();
 }
 
-void Aluno::setChave(int chave)
+void Aluno::setChave(const int &chave)
 {
     if (chave < 0)
         throw QString("chave invalida");
     this->chave = chave;
 }
 
-void Aluno::setNome(QString nome)
+void Aluno::setNome(const QString &nome)
 {
     if (nome.isEmpty())
         throw QString("Nome vazio");

@@ -4,11 +4,11 @@ TabHashAluno::TabHashAluno() : TabHash<Aluno>()
 {
 }
 
-TabHashAluno::TabHashAluno(int TamanhoTabela, int colisao) : TabHash<Aluno>(TamanhoTabela, colisao)
+TabHashAluno::TabHashAluno(const int& TamanhoTabela, const int& colisao) : TabHash<Aluno>(TamanhoTabela, colisao)
 {
 }
 
-int TabHashAluno::getChave(Aluno entrada) const
+int TabHashAluno::getChave(const Aluno& entrada) const
 {
     return entrada.getChave();
 }

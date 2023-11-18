@@ -33,7 +33,7 @@ public:
         return !(bool(quantidadeElementos));
     }
 
-    void inserirInicio(L entrada)
+    void inserirInicio(const L &entrada)
     {
         try
         {
@@ -83,7 +83,7 @@ public:
         return valor;
     }
 
-    void inserirFim(L entrada)
+    void inserirFim(const L &entrada)
     {
         if (estaVazia())
         {
@@ -128,7 +128,7 @@ public:
         return valor;
     }
 
-    void inserirPosicao(int posicao, L entrada)
+    void inserirPosicao(const int &posicao, const L &entrada)
     {
         if (posicao < 0 || posicao > quantidadeElementos)
         {
@@ -177,7 +177,7 @@ public:
         }
     }
 
-    L acessarPosicao(int posicao) const
+    L acessarPosicao(const int &posicao) const
     {
         if (posicao < 0 || posicao >= quantidadeElementos)
         {
@@ -203,7 +203,7 @@ public:
         return elemento->getDado();
     }
 
-    L retirarPosicao(int posicao)
+    L retirarPosicao(const int &posicao)
     {
         if (estaVazia())
         {

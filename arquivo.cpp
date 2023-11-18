@@ -16,7 +16,7 @@ void Arquivo::abrir()
     if (!vetor)
         throw QString("Vetor nao existe");
 
-    QString endereco_arquivo = "/home/puc/Documentos/repos/Atividade13-EDII/dados/DadosDosAlunos_Matricula_Nome.csv";
+    QString endereco_arquivo = "/home/cpedrohenrique1/Documents/development/qtcreator/Atividade13-EDII/dados/DadosDosAlunos_Matricula_Nome.csv";
     QFile arquivo(endereco_arquivo);
     if (!arquivo.open(QIODevice::ReadOnly))
         throw QString("Nao foi possivel abrir o arquivo");

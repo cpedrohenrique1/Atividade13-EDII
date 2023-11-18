@@ -11,9 +11,9 @@ private:
 
 public:
     Aluno();
-    Aluno(int chave, QString nome);
-    void setChave(int chave);
-    void setNome(QString nome);
+    Aluno(const int &chave, const QString &nome);
+    void setChave(const int &chave);
+    void setNome(const QString &nome);
     int getChave() const;
     QString getNome() const;
 };

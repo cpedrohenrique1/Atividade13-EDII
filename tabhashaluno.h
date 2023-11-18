@@ -8,8 +8,8 @@ class TabHashAluno : public TabHash<Aluno>
 {
 public:
     TabHashAluno();
-    TabHashAluno(int TamanhoTabela, int colisao);
-    int getChave(Aluno entrada) const override;
+    TabHashAluno(const int& TamanhoTabela, const int& colisao);
+    int getChave(const Aluno& entrada) const override;
 };
 
 #endif // TABHASHALUNO_H

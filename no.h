@@ -8,40 +8,49 @@ class NO
 {
 private:
     L dado;
-    NO* proximo;
-    NO* anterior;
+    NO *proximo;
+    NO *anterior;
+
 public:
-    NO() :  dado(),
-            proximo(0),
-            anterior(0)
-    {}
+    NO() : dado(),
+           proximo(0),
+           anterior(0)
+    {
+    }
 
-    NO(L newDado) :     dado(newDado),
-                        proximo(0),
-                        anterior(0)
-    {}
+    NO(const L &newDado) : dado(newDado),
+                           proximo(0),
+                           anterior(0)
+    {
+    }
 
-    L getDado()const{
+    L getDado() const
+    {
         return dado;
     }
-    
-    void setDado(L newDado){
+
+    void setDado(const L &newDado)
+    {
         dado = newDado;
     }
-    
-    NO* getProximo()const{
+
+    NO *getProximo() const
+    {
         return proximo;
     }
-    
-    void setProximo(NO* newProximo){
+
+    void setProximo(NO *newProximo)
+    {
         proximo = newProximo;
     }
-    
-    NO* getAnterior()const{
+
+    NO *getAnterior() const
+    {
         return anterior;
     }
-    
-    void setAnterior(NO* newAnterior){
+
+    void setAnterior(NO *newAnterior)
+    {
         anterior = newAnterior;
     }
 };
