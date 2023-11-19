@@ -82,18 +82,24 @@ void Tabela::atualizar()
 
     limpar();
 
+    int j = 0;
     for (int i = 0; i < tamanho_tabela; ++i)
     {
-        tabela->insertRow(i);
-        tabela->setItem(i, 0, new QTableWidgetItem(QString::number(i)));
-        tabela->setItem(i, 1, new QTableWidgetItem(vetor->Consultar(i).getNome()));
+        QString nomeCompleto = vetor->Consultar(i).getNome();
+        if (nomeCompleto == ""){
+            continue;
+        }
+        tabela->insertRow(j);
+        tabela->setItem(j, 0, new QTableWidgetItem(QString::number(i)));
+        tabela->setItem(j, 1, new QTableWidgetItem(nomeCompleto));
+        ++j;
     }
 }
 
 QString Tabela::buscaElemento(const int &matricula)
 {
     if (matricula >= tamanho_tabela || matricula < 0)
-        throw QString("Numero invalido, tem que ser entre 0 e 999");
+        throw QString("Numero invalido, tem que ser entre 0 e " + QString::number(tamanho_tabela));
 
     if (!vetor)
         throw QString("vetor nao localizado {buscaelemento}");
@@ -148,8 +154,6 @@ void Tabela::removerElemento(const int &matricula)
         throw QString("vetor nao localizado {removerElemento}");
     if (matricula < 0 || matricula >= tamanho_tabela)
         throw QString("numero de matricula nao condiz com os padroes {removerElemento}");
-    if (vetor->Consultar(matricula).getNome() == "")
-        throw QString("elemento ja foi removido {removerElemento}");
     vetor->ExcluirDados(matricula);
     atualizar();
 }

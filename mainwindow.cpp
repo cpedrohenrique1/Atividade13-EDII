@@ -36,12 +36,11 @@ void MainWindow::on_pushButton_inserir_clicked()
     {
         bool ok;
         int matricula = ui->lineEdit_matricula->text().toInt(&ok);
-        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
         if (!ok)
             throw QString("matricula nao pode estar vazia");
+        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
         tabela->inserirElemento(matricula, nomeCompleto);
-        tabela->atualizar();
-        QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + "\nNome Completo:" + tabela->buscaElemento(matricula) +" inserido");
+        QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + "\nNome Completo:" + nomeCompleto +" inserido");
     }
     catch(QString &e){
         QMessageBox::critical(this, "Erro", e);
@@ -58,11 +57,10 @@ void MainWindow::on_pushButton_alterar_clicked()
     {
         bool ok;
         int matricula = ui->lineEdit_matricula->text().toInt(&ok);
-        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
         if (!ok)
             throw QString("n° matricula nao pode estar vazio");
+        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
         tabela->alterarElemento(matricula, nomeCompleto);
-        tabela->atualizar();
         QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + " alterado");
     }
     catch(QString &e){
@@ -83,7 +81,6 @@ void MainWindow::on_pushButton_remover_clicked()
         if (!ok)
             throw QString("n° matricula nao pode estar vazio");
         tabela->removerElemento(matricula);
-        tabela->atualizar();
         QMessageBox::about(this, "Concluido", "Elemento de matricula: " + QString::number(matricula) + " removido");
     }
     catch(QString &e){
@@ -99,14 +96,13 @@ void MainWindow::on_pushButton_consultar_clicked()
     try
     {
         bool ok;
-        QString nomeCompleto = ui->lineEdit_nomeCompleto->text();
         int matricula = ui->lineEdit_matricula->text().toInt(&ok);
         if (ok){
-            nomeCompleto = tabela->buscaElemento(matricula);
+            QString nomeCompleto = tabela->buscaElemento(matricula);
             if (nomeCompleto == "")
-                QMessageBox::about(this, "Problema", "Nao foi encontrado");
+                throw QString("Elemento nao encontrado");
             else
-                QMessageBox::about(this, "Concluido", "Matricula: " + QString::number(matricula) + "\nNome Completo: " + tabela->buscaElemento(matricula));
+                QMessageBox::about(this, "Concluido", "Matricula: " + QString::number(matricula) + "\nNome Completo: " + nomeCompleto);
         }else{
             throw QString("n° matricula invalido");
         }
