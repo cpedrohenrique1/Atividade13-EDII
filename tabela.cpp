@@ -99,7 +99,7 @@ void Tabela::atualizar()
 QString Tabela::buscaElemento(const int &matricula)
 {
     if (matricula >= tamanho_tabela || matricula < 0)
-        throw QString("Numero invalido, tem que ser entre 0 e " + QString::number(tamanho_tabela));
+        throw QString("Numero invalido, tem que ser entre 0 e " + QString::number(tamanho_tabela - 1));
 
     if (!vetor)
         throw QString("vetor nao localizado {buscaelemento}");

@@ -94,10 +94,6 @@ public:
         NO<L> *iterator = tabela[chave]->acessarInicio();
         for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i)
         {
-            if (getChave(iterator->getDado()) > temp)
-            {
-                break;
-            }
             if (getChave(iterator->getDado()) == temp)
             {
                 tabela[chave]->retirarPosicao(i);
@@ -126,10 +122,6 @@ public:
         NO<L> *iterator = tabela[chave]->acessarInicio();
         for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i)
         {
-            if (getChave(iterator->getDado()) > temp)
-            {
-                break;
-            }
             if (getChave(iterator->getDado()) == temp)
             {
                 return iterator->getDado();

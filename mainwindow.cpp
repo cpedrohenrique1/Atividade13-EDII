@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     try{
-        tabela = new Tabela(ui->tableWidget_saida_dados, 1000, 3);
+        tabela = new Tabela(ui->tableWidget_saida_dados, 1000, 50);
         tabela->start();
         Arquivo arquivo(tabela->getVetor());
         arquivo.abrir();
