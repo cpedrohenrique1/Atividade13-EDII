@@ -40,7 +40,8 @@
     "*.tcc": "cpp",
     "cmath": "cpp",
     "utility": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "qheaderview": "cpp"
   },
   "C_Cpp_Runner.msvcWarnings": [
     "/W4",

@@ -10,20 +10,24 @@ class TabHash
 protected:
     Lista<L> **tabela;
     int tamanhoTabela;
+    int colisoes;
 
 public:
     TabHash() : tabela(0),
+                colisoes(0),
                 tamanhoTabela(0)
     {
     }
 
     TabHash(const int &tamanhoTabela, const int &colisoes) : tabela(0),
+                                                             colisoes(0),
                                                              tamanhoTabela(0)
     {
         if (tamanhoTabela <= 0 || colisoes <= 0)
         {
             throw QString("Nao foi possivel, tamanho invalido ou colisao invalida");
         }
+        this->colisoes = colisoes;
         this->tamanhoTabela = calcularNPrimo(tamanhoTabela, colisoes);
         try
         {
@@ -38,6 +42,16 @@ public:
         {
             throw QString("nao foi possivel alocar memoria");
         }
+    }
+
+    int getColisoes() const
+    {
+        return colisoes;
+    }
+
+    Lista<L> **getVetor() const
+    {
+        return tabela;
     }
 
     ~TabHash()
@@ -64,14 +78,22 @@ public:
 
     virtual int getChave(const L &entrada) const = 0;
 
+    int calcPosicao(const int &entrada) const
+    {
+        if (entrada < 0)
+        {
+            throw QString("Chave invalida");
+        }
+        return entrada % tamanhoTabela;
+    }
+
     void IncluirDados(const L &entrada)
     {
         if (!tabela || tamanhoTabela <= 0)
         {
             throw QString("Tabela nao alocada");
         }
-        int chave = getChave(entrada);
-        chave %= tamanhoTabela;
+        int chave = calcPosicao(getChave(entrada));
         if (chave >= tamanhoTabela)
         {
             throw QString("Chave invalida");
@@ -86,7 +108,7 @@ public:
             throw QString("Tabela nao alocada");
         }
         int temp = chave;
-        chave %= tamanhoTabela;
+        chave = calcPosicao(chave);
         if (chave < 0 || chave >= tamanhoTabela)
         {
             throw QString("Chave invalida");
@@ -114,7 +136,7 @@ public:
             throw QString("Chave invalida");
         }
         int temp = chave;
-        chave %= tamanhoTabela;
+        chave = calcPosicao(chave);
         if (chave >= tamanhoTabela)
         {
             throw QString("Chave invalida");

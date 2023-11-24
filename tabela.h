@@ -9,7 +9,7 @@ class Tabela
 {
 private:
     QTableWidget *tabela;
-    TabHashAluno *vetor;
+    TabHashAluno *tabela_hash;
     int tamanho_tabela;
 
 public:
