@@ -56,17 +56,17 @@ public:
     }
 
     ~TabHash()
-    {
-        for (int i = 0; i < tamanhoTabela; ++i)
-        {
-            if (tabela[i])
-            {
-                delete tabela[i];
-                tabela[i] = 0;
-            }
-        }
+    {        
         if (tabela)
         {
+            for (int i = 0; i < tamanhoTabela; ++i)
+            {
+                if (tabela[i])
+                {
+                    delete tabela[i];
+                    tabela[i] = 0;
+                }
+            }
             delete[] tabela;
             tabela = 0;
         }
