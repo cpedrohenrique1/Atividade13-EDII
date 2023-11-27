@@ -91,8 +91,8 @@ void Tabela::atualizar()
 
 QString Tabela::buscaElemento(const int &matricula)
 {
-    if (matricula >= tamanho_tabela || matricula < 0)
-        throw QString("Numero invalido, tem que ser entre 0 e " + QString::number(tamanho_tabela - 1));
+    if (matricula < 0)
+        throw QString("Numero invalido");
 
     if (!tabela_hash)
         throw QString("tabela_hash nao localizado {buscaelemento}");
@@ -101,7 +101,7 @@ QString Tabela::buscaElemento(const int &matricula)
 
 void Tabela::inserirElemento(const int &matricula, const QString &nomeCompleto)
 {
-    if (matricula < 0 || matricula >= tamanho_tabela)
+    if (matricula < 0)
         throw QString("numero de matricula nao condiz com os padroes {inserirElemento}");
 
     if (nomeCompleto.isEmpty())
@@ -119,7 +119,7 @@ void Tabela::inserirElemento(const int &matricula, const QString &nomeCompleto)
 
 void Tabela::alterarElemento(const int &matricula, const QString &nomeCompleto)
 {
-    if (matricula < 0 || matricula >= tamanho_tabela)
+    if (matricula < 0)
         throw QString("numero de matricula nao condiz com os padroes {alterarElemento}");
 
     if (nomeCompleto.isEmpty())
@@ -145,7 +145,7 @@ void Tabela::removerElemento(const int &matricula)
 {
     if (!tabela_hash)
         throw QString("tabela_hash nao localizado {removerElemento}");
-    if (matricula < 0 || matricula >= tamanho_tabela)
+    if (matricula < 0)
         throw QString("numero de matricula nao condiz com os padroes {removerElemento}");
     tabela_hash->ExcluirDados(matricula);
     atualizar();
