@@ -102,31 +102,30 @@ public:
         tabela[chave]->inserirInicio(entrada);
     }
 
-    void ExcluirDados(int chave)
+    void ExcluirDados(const int& chave)
     {
         if (!tabela || tamanhoTabela <= 0)
         {
             throw QString("Tabela nao alocada");
         }
-        int temp = chave;
-        chave = calcPosicao(chave);
-        if (chave < 0 || chave >= tamanhoTabela)
+        int temp = calcPosicao(chave);
+        if (temp < 0 || temp >= tamanhoTabela)
         {
             throw QString("Chave invalida");
         }
-        NO<L> *iterator = tabela[chave]->acessarInicio();
-        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i)
+        NO<L> *iterator = tabela[temp]->acessarInicio();
+        for (int i = 0; i < tabela[temp]->getQuantidadeElementos(); ++i)
         {
-            if (getChave(iterator->getDado()) == temp)
+            if (getChave(iterator->getDado()) == chave)
             {
-                tabela[chave]->retirarPosicao(i);
+                tabela[temp]->retirarPosicao(i);
                 return;
             }
             iterator = iterator->getProximo();
         }
     }
 
-    L Consultar(int chave)
+    L Consultar(const int& chave)
     {
         if (!tabela || tamanhoTabela <= 0)
         {
@@ -136,16 +135,15 @@ public:
         {
             throw QString("Chave invalida");
         }
-        int temp = chave;
-        chave = calcPosicao(chave);
-        if (chave >= tamanhoTabela)
+        int temp = calcPosicao(chave);
+        if (temp >= tamanhoTabela)
         {
             throw QString("Chave invalida");
         }
-        NO<L> *iterator = tabela[chave]->acessarInicio();
-        for (int i = 0; i < tabela[chave]->getQuantidadeElementos(); ++i)
+        NO<L> *iterator = tabela[temp]->acessarInicio();
+        for (int i = 0; i < tabela[temp]->getQuantidadeElementos(); ++i)
         {
-            if (getChave(iterator->getDado()) == temp)
+            if (getChave(iterator->getDado()) == chave)
             {
                 return iterator->getDado();
             }
